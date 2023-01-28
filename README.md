@@ -4,9 +4,10 @@ Simple site that can search the spoken text within a video to find specifc clips
 Example of using the site:
 
 <p align="center">
-  <img src="https://github.com/hexhowells/YouTube-Clip-Finder/blob/main/demo.jpg" width=70%>
+  <img src="https://github.com/hexhowells/YouTube-Clip-Finder/blob/main/demo.jpg" width=80%>
 </p>
 
 ### TODO
 - allow for fuzzy search
 - search entire text block instead of smaller chunks (text being searched could span across multiple transcript chunks)
+- find a better way of fetching video metadata (videos with embedding disabled wont be loaded)
