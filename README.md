@@ -1,2 +1,12 @@
 # YouTube-Clip-Finder
-Find clips in a YouTube video from a text search
+Simple site that can search the spoken text within a video to find specifc clips using a Flask backend and vanilla HTML, CSS, JS in the front-end.
+
+Example of using the site:
+
+<p align="center">
+  <img src="https://github.com/hexhowells/YouTube-Clip-Finder/blob/main/demo.jpg" width=70%>
+</p>
+
+### TODO
+- allow for fuzzy search
+- search entire text block instead of smaller chunks (text being searched could span across multiple transcript chunks)
