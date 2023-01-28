@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>YouTube Clip Finder</title>
+
+	<link rel="stylesheet" href="styles.css?v=1.0">
+</head>
+<body>
+	<div class="header-container">
+	<div class="header">
+		<img src="icon.png" style="width: 80px">
+		<h1>YouTube Clip Finder</h1>
+	</div>
+	</div>
+
+	<div class="video-search">
+		<h2>YouTube URL</h2>
+		<form id="videoSearchForm" action="/find-video" method="post">
+			<input type="text" id="video-link" name="video-link">
+			<input type="submit" value="Find Video">
+		</form>
+	</div>
+
+	<div class="video-preview-container">
+		<p id="errorMessage"></p>
+		<div class="video-preview" id="videoPreview">
+			<img id="previewThumbnail" src="" width="300px">
+			<p id="previewTitle"></p>
+			<!-- <p id="previewChannel">channel</p> -->
+		</div>
+	</div>
+
+	<div class="clip-search">
+		<h2>Text to find</h2>
+		<form id="searchTextForm" action="/find-clip" method="post">
+			<input type="text" id="search-text" name="search-text">
+			<input type="submit" value="Find Clips">
+		</form>
+	</div>
+
+	<div class="clips" id="clips">
+		
+	</div>
+
+	<script>
+		let video_url = ""
+
+		document.getElementById("videoSearchForm").addEventListener("submit", search_video);
+		document.getElementById("searchTextForm").addEventListener("submit", find_clip);
+
+		function search_video(e) {
+			e.preventDefault();
+
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "/find-video"); 
+			xhr.onload = function(event){ 
+				var status = event.target.status;
+
+				// clear preview
+				document.getElementById('previewThumbnail').src = ""
+				document.getElementById('previewTitle').innerHTML = ""
+				document.getElementById('errorMessage').innerHTML = ""
+
+				if (status == '200'){
+					var response = JSON.parse(event.target.response);
+					document.getElementById('previewThumbnail').src = response.img_url;
+				    document.getElementById('previewTitle').innerHTML = response.title;
+				    //document.getElementById('previewChannel').innerHTML = response.channel;
+
+				    video_url = document.getElementById("video-link").value
+				}
+				else {
+					console.log("error")
+					document.getElementById('errorMessage').innerHTML = "Video Not Found";
+				}
+			    
+			}; 
+			
+			var formData = new FormData(document.getElementById("videoSearchForm"));
+			xhr.send(formData);
+		}
+
+		function create_timestamp_link(url, seconds) {
+			var date = new Date(null);
+			date.setSeconds(seconds);
+			var timestamp = date.toISOString().substr(11, 8);
+			var timestamp_url = `${url}&t=${seconds}`
+
+			a_tag = `<a href=${timestamp_url} target="_blank">${timestamp}</a>\t`;
+
+			return a_tag
+		}
+
+		function show_clips(clips) {
+			clip_list = document.getElementById("clips");
+			clip_list.innerHTML = "";
+
+			h_clip_count = document.createElement("h3");
+			h_clip_count.innerHTML = `${clips.length} clips found`;
+			clip_list.appendChild(h_clip_count);
+
+			for (var i in clips) {
+				timestamp = Math.floor(clips[i].start);
+
+				var div_clip = document.createElement('div');
+				var p_text = document.createElement('p');
+				var a_url = document.createElement('a');
+
+				a_tag = create_timestamp_link(video_url, timestamp);
+
+				p_text.innerHTML = a_tag + " " + clips[i].text;
+				div_clip.appendChild(p_text);
+
+				clip_list.appendChild(div_clip);
+			}
+		}
+
+		function find_clip(e) {
+			e.preventDefault();
+
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "/find-clips"); 
+			xhr.onload = function(event){ 
+			    var response = JSON.parse(event.target.response);
+			    show_clips(response);
+			}; 
+			
+			var formData = new FormData(document.getElementById("searchTextForm"));
+			formData.append("video-link", video_url);
+			xhr.send(formData);
+		}	
+	</script>
+</body>
+</html>

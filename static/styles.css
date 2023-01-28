@@ -1,0 +1,125 @@
+@font-face {
+	font-family: 'poppins600';
+	src: url('fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'poppins300';
+	src: url('fonts/Poppins/Poppins-Light.ttf') format('truetype');
+}
+
+body {
+	font-family: poppins300 !important;
+	margin: auto;
+	width: 800px;
+}
+
+.header-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.header {
+	font-family: poppins600;
+	padding-bottom: 35px;
+	display: grid;
+	column-gap: 15px;
+  	grid-template-columns: min-content auto;
+  	margin: auto;
+}
+
+.header img {
+	padding-top: 5px
+}
+
+.video-search {
+	text-align: center;
+	padding-bottom: 20px;
+	overflow: auto;
+}
+
+.video-search input[type=text] {
+	width: 80%;
+	margin: auto;
+	padding: 10px;
+	font-size: 17px;
+	border: 1px solid grey;
+	float: left;
+	background: #f1f1f1;
+}
+
+.video-search input[type=submit] {
+	  float: left;
+	  padding: 10px;
+	  background: #2196F3;
+	  color: white;
+	  font-size: 17px;
+	  border: 1px solid grey;
+	  border-left: none;
+	  cursor: pointer;
+	  width: 14%;
+}
+
+.video-preview-container {
+  	padding-bottom: 20px;
+}
+
+.video-preview {
+	width: 300px;
+	display: grid;
+	column-gap: 20px;
+  	grid-template-columns: min-content 300px;
+}
+
+.video-preview p {
+	font-family: poppins600;
+}
+
+.clip-search {
+	text-align: center;
+	padding-bottom: 20px;
+	overflow: auto;
+}
+
+.clip-search input[type=text] {
+	width: 80%;
+	margin: auto;
+	padding: 10px;
+	font-size: 17px;
+	border: 1px solid grey;
+	float: left;
+	background: #f1f1f1;
+}
+
+.clip-search input[type=submit] {
+	  float: left;
+	  padding: 10px;
+	  background: #2196F3;
+	  color: white;
+	  font-size: 17px;
+	  border: 1px solid grey;
+	  border-left: none;
+	  cursor: pointer;
+	  width: 14%;
+}
+
+.clips {
+	padding-left: 10px;
+}
+
+/* Changes for mobile */
+/*@media screen and (max-width: 600px) {
+  body {
+    width: 350px;
+  }
+
+  .video-search input[type=text] {
+  	width: 70%;
+  }
+
+  .video-search input[type=submit] {
+  	width: auto;
+  }
+}
+*/
