@@ -1,5 +1,5 @@
 # YouTube-Clip-Finder
-Simple site that can search the spoken text within a video to find specifc clips using a Flask backend and vanilla HTML, CSS, JS in the front-end.
+Simple site that can search the spoken text within a video to find specifc clips using a Flask backend and vanilla HTML, CSS, JS in the front-end. Written in a day for fun and practice with more web stuff.
 
 Example of using the site:
 
