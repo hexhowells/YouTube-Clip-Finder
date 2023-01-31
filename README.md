@@ -11,3 +11,5 @@ Example of using the site:
 - allow for fuzzy search
 - search entire text block instead of smaller chunks (text being searched could span across multiple transcript chunks)
 - find a better way of fetching video metadata (videos with embedding disabled wont be loaded)
+- make UI work for mobile
+- use TTS for videos with transcription disabled
